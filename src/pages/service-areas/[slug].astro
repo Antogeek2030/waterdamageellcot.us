@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { areas, getAreaBySlug } from '../../data/areas';
+import { services } from '../../data/services';
+
+export function getStaticPaths() {
+  return areas.map((area) => ({
+    params: { slug: area.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const area = getAreaBySlug(slug!);
+
+if (!area) {
+  return Astro.redirect('/404');
+}
+
+const title = `Water Damage Restoration in ${area.name} MD | Local Service`;
+const description = `Professional water damage restoration serving ${area.name}, MD and nearby areas. Fast extraction, drying, and recovery. Call today.`;
+const phone = '(410) 555-0199';
+const phoneLink = 'tel:+14105550199';
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="bg-primary text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav class="text-sky-200 text-sm mb-4" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-white">Home</a>
+        <span class="mx-2">/</span>
+        <a href="/service-areas" class="hover:text-white">Service Areas</a>
+        <span class="mx-2">/</span>
+        <span class="text-white">{area.name}</span>
+      </nav>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">Water Damage Restoration in {area.name}</h1>
+      <p class="text-sky-100 text-lg max-w-3xl">{area.nearbyNote}</p>
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div class="lg:col-span-2 space-y-8">
+          <div>
+            <h2 class="text-2xl font-bold text-neutral-900 mb-4">Serving {area.name} and Nearby</h2>
+            <p class="text-neutral-700 leading-relaxed text-lg">{area.description}</p>
+          </div>
+          <div>
+            <h2 class="text-2xl font-bold text-neutral-900 mb-4">Services Available in {area.name}</h2>
+            <p class="text-neutral-600 mb-6">We bring the full range of water damage restoration services to {area.name} properties:</p>
+            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {services.slice(0, 10).map((s) => (
+                <li>
+                  <a href={`/services/${s.slug}`} class="text-primary hover:underline font-medium">{s.title}</a>
+                </li>
+              ))}
+            </ul>
+            <a href="/services" class="inline-block mt-4 text-primary font-semibold hover:underline">View all services →</a>
+          </div>
+        </div>
+        <aside>
+          <div class="bg-primary text-white p-6 rounded-xl sticky top-24">
+            <h3 class="text-xl font-bold mb-3">Need Help in {area.name}?</h3>
+            <p class="text-sky-100 mb-4 text-sm">Call for a prompt local response or send us a message.</p>
+            <a href={phoneLink} class="block w-full text-center bg-white text-primary font-bold py-3 rounded-lg hover:bg-sky-50 transition-colors mb-3">
+              Call {phone}
+            </a>
+            <a href="/contact" class="block w-full text-center border border-white text-white font-semibold py-3 rounded-lg hover:bg-white/10 transition-colors">
+              Contact Form
+            </a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

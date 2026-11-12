@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { services, getServiceBySlug } from '../../data/services';
+
+export function getStaticPaths() {
+  return services.map((service) => ({
+    params: { slug: service.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const service = getServiceBySlug(slug!);
+
+if (!service) {
+  return Astro.redirect('/404');
+}
+
+const title = `${service.title} in Ellicott City MD | Water Damage Pros`;
+const description = `${service.shortDesc} Serving Ellicott City, Westminster, Columbia and nearby Maryland communities. Call for fast help.`;
+const phone = '(410) 555-0199';
+const phoneLink = 'tel:+14105550199';
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="bg-primary text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav class="text-sky-200 text-sm mb-4" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-white">Home</a>
+        <span class="mx-2">/</span>
+        <a href="/services" class="hover:text-white">Services</a>
+        <span class="mx-2">/</span>
+        <span class="text-white">{service.title}</span>
+      </nav>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">{service.title}</h1>
+      <p class="text-sky-100 text-lg max-w-3xl">{service.shortDesc}</p>
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div class="lg:col-span-2 space-y-10">
+          <div>
+            <h2 class="text-2xl font-bold text-neutral-900 mb-4">About This Service</h2>
+            <p class="text-neutral-700 leading-relaxed text-lg">{service.intro}</p>
+          </div>
+
+          <div>
+            <h2 class="text-2xl font-bold text-neutral-900 mb-4">Our Process</h2>
+            <ol class="space-y-4">
+              {service.process.map((step, i) => (
+                <li class="flex gap-4">
+                  <span class="flex-shrink-0 w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center font-semibold text-sm">{i + 1}</span>
+                  <span class="text-neutral-700 pt-1">{step}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          <div>
+            <h2 class="text-2xl font-bold text-neutral-900 mb-4">Typical Price Range</h2>
+            <p class="text-neutral-700 leading-relaxed bg-neutral-50 p-6 rounded-xl border border-neutral-100">{service.priceRange}</p>
+            <p class="text-sm text-neutral-500 mt-3">Final cost depends on the unique conditions of your property. We provide clear estimates before work begins.</p>
+          </div>
+
+          <div>
+            <h2 class="text-2xl font-bold text-neutral-900 mb-4">Frequently Asked Questions</h2>
+            <div class="space-y-4">
+              {service.faqs.map((faq) => (
+                <details class="group bg-neutral-50 rounded-xl border border-neutral-100">
+                  <summary class="cursor-pointer p-5 font-medium text-neutral-900 list-none flex justify-between items-center">
+                    {faq.q}
+                    <svg class="w-5 h-5 text-neutral-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                  </summary>
+                  <div class="px-5 pb-5 text-neutral-700 leading-relaxed">{faq.a}</div>
+                </details>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <aside class="lg:col-span-1">
+          <div class="sticky top-24 space-y-6">
+            <div class="bg-primary text-white p-6 rounded-xl">
+              <h3 class="text-xl font-bold mb-3">Need This Service?</h3>
+              <p class="text-sky-100 mb-4 text-sm">Call now for a prompt response or request a callback. We serve Ellicott City and surrounding areas.</p>
+              <a href={phoneLink} class="block w-full text-center bg-white text-primary font-bold py-3 rounded-lg hover:bg-sky-50 transition-colors mb-3">
+                Call {phone}
+              </a>
+              <a href="/contact" class="block w-full text-center border border-white text-white font-semibold py-3 rounded-lg hover:bg-white/10 transition-colors">
+                Contact Form
+              </a>
+            </div>
+            <div class="bg-neutral-50 p-6 rounded-xl border border-neutral-100">
+              <h3 class="font-semibold text-neutral-900 mb-3">Related Services</h3>
+              <ul class="space-y-2 text-sm">
+                {services.filter(s => s.slug !== service.slug).slice(0, 5).map((s) => (
+                  <li><a href={`/services/${s.slug}`} class="text-primary hover:underline">{s.title}</a></li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

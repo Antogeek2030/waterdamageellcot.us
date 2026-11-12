@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { services } from '../../data/services';
+
+const title = 'Water Damage Services in Ellicott City MD | Full Restoration Menu';
+const description = 'Explore our complete list of water damage restoration services including extraction, flood cleanup, mold remediation, basement drying and more for Ellicott City and nearby areas.';
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="bg-primary text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">Our Water Damage Services</h1>
+      <p class="text-sky-100 text-lg max-w-3xl">From emergency extraction to complete structural drying and mold prevention, we provide the services Maryland property owners need after water intrusion.</p>
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {services.map((service) => (
+          <a href={`/services/${service.slug}`} class="group flex flex-col sm:flex-row gap-4 p-6 bg-white border border-neutral-200 rounded-xl hover:border-primary hover:shadow-md transition-all">
+            <div class="flex-1">
+              <h2 class="text-xl font-semibold text-neutral-900 group-hover:text-primary mb-2">{service.title}</h2>
+              <p class="text-neutral-600 text-sm leading-relaxed">{service.shortDesc}</p>
+              <span class="inline-block mt-3 text-primary text-sm font-medium">View details →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12 bg-neutral-50">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-2xl font-bold text-neutral-900 mb-4">Not Sure Which Service You Need?</h2>
+      <p class="text-neutral-600 mb-6">Describe the situation and we will recommend the right approach. Call us or send a message—we are here to help.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="tel:+14105550199" class="inline-flex items-center justify-center gap-2 bg-primary text-white font-semibold px-6 py-3 rounded-lg hover:bg-primary-dark transition-colors">Call (410) 555-0199</a>
+        <a href="/contact" class="inline-flex items-center justify-center gap-2 border border-primary text-primary font-semibold px-6 py-3 rounded-lg hover:bg-primary/5 transition-colors">Contact Form</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Water Damage Blog | Tips & Insights for Ellicott City Homeowners';
+const description = 'Practical articles about water damage prevention, restoration, and recovery for property owners in Ellicott City, Westminster, and nearby Maryland communities.';
+
+const posts = [
+  {
+    slug: 'what-to-do-after-a-pipe-burst',
+    title: 'What to Do Immediately After a Pipe Burst',
+    excerpt: 'A sudden pipe burst can release a surprising amount of water. Here are the practical steps to take while you wait for professional help.',
+    date: '2025-09-12',
+  },
+  {
+    slug: 'preventing-basement-flooding-in-maryland',
+    title: 'Preventing Basement Flooding During Maryland Storms',
+    excerpt: 'Heavy rain is common in our region. Simple maintenance and awareness can reduce the risk of a flooded basement.',
+    date: '2025-08-03',
+  },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="bg-primary text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">Water Damage Blog</h1>
+      <p class="text-sky-100 text-lg max-w-3xl">Practical information for homeowners and businesses dealing with or preparing for water damage in the Ellicott City area.</p>
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      {posts.map((post) => (
+        <article class="border-b border-neutral-200 pb-8">
+          <time class="text-sm text-neutral-500" datetime={post.date}>{new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+          <h2 class="text-2xl font-bold text-neutral-900 mt-2 mb-3">
+            <a href={`/blog/${post.slug}`} class="hover:text-primary">{post.title}</a>
+          </h2>
+          <p class="text-neutral-600 leading-relaxed mb-3">{post.excerpt}</p>
+          <a href={`/blog/${post.slug}`} class="text-primary font-medium hover:underline">Read more →</a>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

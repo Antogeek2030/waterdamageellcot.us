@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'About Us | Water Damage Restoration Ellicott City MD';
+const description = 'Learn about our local water damage restoration team serving Ellicott City, Westminster, and surrounding Maryland communities with professional, respectful service.';
+const phone = '(410) 555-0199';
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="bg-primary text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">About Our Team</h1>
+      <p class="text-sky-100 text-lg max-w-3xl">Local water damage restoration focused on clear communication, thorough work, and respect for every property we enter.</p>
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div>
+        <h2 class="text-2xl font-bold text-neutral-900 mb-4">Who We Are</h2>
+        <p class="text-neutral-700 leading-relaxed text-lg">
+          Water Damage Restoration Ellicott City MD is a locally focused restoration team serving homeowners and businesses across Ellicott City, Westminster, Columbia, and nearby communities. We understand that water damage is stressful. Our approach prioritizes fast response, honest assessments, and careful work that protects both the structure and the people who live or work there.
+        </p>
+      </div>
+      <div>
+        <h2 class="text-2xl font-bold text-neutral-900 mb-4">How We Work</h2>
+        <p class="text-neutral-700 leading-relaxed">
+          Every job begins with a clear conversation about what happened and what needs to happen next. We use professional extraction and drying equipment, monitor moisture levels, and keep you informed throughout the process. Whether the issue is a burst pipe, a flooded basement, or storm-related intrusion, we focus on practical solutions rather than unnecessary upselling.
+        </p>
+      </div>
+      <div>
+        <h2 class="text-2xl font-bold text-neutral-900 mb-4">Our Service Area</h2>
+        <p class="text-neutral-700 leading-relaxed">
+          We are based near Westminster and regularly serve Ellicott City and the surrounding towns in Howard, Carroll, and adjacent counties. If you are unsure whether we cover your address, simply call—we will let you know quickly.
+        </p>
+      </div>
+      <div>
+        <h2 class="text-2xl font-bold text-neutral-900 mb-4">Ready to Talk?</h2>
+        <p class="text-neutral-700 leading-relaxed mb-6">
+          If you are dealing with water damage or want to understand your options, we are here to help. Reach out by phone or through our contact form.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href={`tel:+14105550199`} class="inline-flex items-center justify-center gap-2 bg-primary text-white font-semibold px-6 py-3 rounded-lg hover:bg-primary-dark transition-colors">Call {phone}</a>
+          <a href="/contact" class="inline-flex items-center justify-center gap-2 border border-primary text-primary font-semibold px-6 py-3 rounded-lg hover:bg-primary/5 transition-colors">Contact Form</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
